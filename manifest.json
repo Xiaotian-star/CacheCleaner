@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "高级缓存管理器",
+  "version": "1.0",
+  "description": "一个功能强大的浏览器缓存管理工具",
+  "permissions": [
+    "storage",
+    "browsingData",
+    "tabs",
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+
+} 

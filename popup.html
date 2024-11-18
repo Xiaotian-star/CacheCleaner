@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>缓存管理器</h1>
+    
+    <div class="time-filter">
+      <select id="timeRange">
+        <option value="last_hour">最近1小时</option>
+        <option value="last_day">最近24小时</option>
+        <option value="last_week">最近7天</option>
+        <option value="last_month">最近30天</option>
+        <option value="all">所有时间</option>
+      </select>
+    </div>
+
+    <div class="data-types">
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="cache" checked>
+          <span>页面缓存</span>
+        </label>
+        <label>
+          <input type="checkbox" id="cookies">
+          <span>Cookies</span>
+        </label>
+        <label>
+          <input type="checkbox" id="downloads">
+          <span>下载记录</span>
+        </label>
+        <label>
+          <input type="checkbox" id="formData">
+          <span>表单数据</span>
+        </label>
+        <label>
+          <input type="checkbox" id="history">
+          <span>浏览历史</span>
+        </label>
+        <label>
+          <input type="checkbox" id="localStorage">
+          <span>本地存储</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="clearSelected" class="primary-btn">清理选中项</button>
+      <button id="clearCurrent" class="secondary-btn">仅清理当前网站</button>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 
