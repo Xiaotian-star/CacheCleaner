@@ -2,6 +2,48 @@ document.addEventListener('DOMContentLoaded', function() {
   const clearSelectedBtn = document.getElementById('clearSelected');
   const clearCurrentBtn = document.getElementById('clearCurrent');
   const statusDiv = document.getElementById('status');
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const timeRangeSelect = document.getElementById('timeRange');
+
+  // 加载保存的设置
+  loadSavedSettings();
+
+  // 监听设置变化并保存
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', saveSettings);
+  });
+  timeRangeSelect.addEventListener('change', saveSettings);
+
+  // 保存设置
+  function saveSettings() {
+    const settings = {
+      timeRange: timeRangeSelect.value,
+      checkboxes: {}
+    };
+    
+    checkboxes.forEach(checkbox => {
+      settings.checkboxes[checkbox.id] = checkbox.checked;
+    });
+
+    chrome.storage.local.set({ settings });
+  }
+
+  // 加载设置
+  async function loadSavedSettings() {
+    const data = await chrome.storage.local.get('settings');
+    if (data.settings) {
+      // 恢复时间范围
+      timeRangeSelect.value = data.settings.timeRange;
+      
+      // 恢复复选框状态
+      Object.entries(data.settings.checkboxes).forEach(([id, checked]) => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+          checkbox.checked = checked;
+        }
+      });
+    }
+  }
 
   function showStatus(message, isError = false) {
     statusDiv.textContent = message;
